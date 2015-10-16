@@ -1,6 +1,6 @@
 {
-  "name": "sitemon",
-  "version": "0.0.0",
+  "name": "sitemon-js",
+  "version": "0.0.1",
   "description": "A node client to send statistics to sitemon",
   "main": "lib/index.js",
   "scripts": {
