@@ -3,6 +3,16 @@ Sitemon JS
 
 A node client for sending statistics to sitemon.
 
+## Usage
+
+```javascript
+var Sitemon = require('sitemon');
+var apiLogger = new Sitemon('api', '123.456.789.123:4567');
+apiLogger.send({
+    method: 'tagged.user.getInfo'
+});
+```
+
 ## Files and Directory Structure
 
 The following describes the various files in this repo and the directory structure.
