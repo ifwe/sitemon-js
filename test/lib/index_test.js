@@ -25,7 +25,7 @@ describe('Sitemon', function() {
 
     describe('single host', function() {
         beforeEach(function() {
-            this.sitemon = new Sitemon('test', '123.456.789.123:4567');
+            this.sitemon = new Sitemon('test', '1.2.3.4:5678');
             sinon.stub(this.client, 'send').callsArgWith(5, null); // no error
         });
 
@@ -66,7 +66,7 @@ describe('Sitemon', function() {
                 bar: 'test_bar'
             }).then(function() {
                 this.client.send.called.should.be.true;
-                this.client.send.lastCall.args[3].should.equal(4567);
+                this.client.send.lastCall.args[3].should.equal(5678);
             }.bind(this));
         });
 
@@ -76,7 +76,7 @@ describe('Sitemon', function() {
                 bar: 'test_bar'
             }).then(function() {
                 this.client.send.called.should.be.true;
-                this.client.send.lastCall.args[4].should.equal('123.456.789.123');
+                this.client.send.lastCall.args[4].should.equal('1.2.3.4');
             }.bind(this));
         });
 

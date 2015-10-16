@@ -7,10 +7,22 @@ A node client for sending statistics to sitemon.
 
 ```javascript
 var Sitemon = require('sitemon');
-var apiLogger = new Sitemon('api', '123.456.789.123:4567');
-apiLogger.send({
-    method: 'tagged.user.getInfo'
-});
+var apiLogger = new Sitemon('api', '1.2.3.4:5678');
+apiLogger.send({ method: 'tagged.user.getInfo' });      // sends message to sitemon over UDP
+```
+
+## Round-robin target hosts
+
+```javascript
+var apiLogger = new Sitemon('api', [
+    '1.2.3.4:5678',
+    '2.3.4.5:6789',
+    '3.4.5.6:7890'
+);
+apiLogger.send({ method: 'tagged.user.getInfo' });      // sends to 1.2.3.4:5678
+apiLogger.send({ method: 'tagged.profile.update' });    // sends to 2.3.4.5:6789
+apiLogger.send({ method: 'tagged.stuff.do' });          // sends to 3.4.5.6:7890
+apiLogger.send({ method: 'tagged.photo.info' });        // sends to 1.2.3.4:5678
 ```
 
 ## Files and Directory Structure
