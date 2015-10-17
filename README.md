@@ -6,7 +6,7 @@ A node client for sending statistics to sitemon.
 ## Usage
 
 ```javascript
-var Sitemon = require('sitemon');
+var Sitemon = require('sitemon-js');
 var apiLogger = new Sitemon('api', '1.2.3.4:5678');
 apiLogger.send({ method: 'tagged.user.getInfo' });      // sends message to sitemon over UDP
 ```
@@ -18,7 +18,7 @@ var apiLogger = new Sitemon('api', [
     '1.2.3.4:5678',
     '2.3.4.5:6789',
     '3.4.5.6:7890'
-);
+]);
 apiLogger.send({ method: 'tagged.user.getInfo' });      // sends to 1.2.3.4:5678
 apiLogger.send({ method: 'tagged.profile.update' });    // sends to 2.3.4.5:6789
 apiLogger.send({ method: 'tagged.stuff.do' });          // sends to 3.4.5.6:7890
