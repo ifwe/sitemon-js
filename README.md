@@ -7,8 +7,8 @@ A node client for sending statistics to sitemon.
 
 ```javascript
 var Sitemon = require('sitemon-js');
-var apiLogger = new Sitemon('api', '1.2.3.4:5678');
-apiLogger.send({ method: 'tagged.user.getInfo' });      // sends message to sitemon over UDP
+var apiLogger = new Sitemon('apitable', '1.2.3.4:5678');
+apiLogger.send({ method: 'tagged.user.getInfo' }, { calls: 1, process_time_ms: 20 });      // sends message to sitemon over UDP
 ```
 
 ## Round-robin target hosts
@@ -19,10 +19,10 @@ var apiLogger = new Sitemon('api', [
     '2.3.4.5:6789',
     '3.4.5.6:7890'
 ]);
-apiLogger.send({ method: 'tagged.user.getInfo' });      // sends to 1.2.3.4:5678
-apiLogger.send({ method: 'tagged.profile.update' });    // sends to 2.3.4.5:6789
-apiLogger.send({ method: 'tagged.stuff.do' });          // sends to 3.4.5.6:7890
-apiLogger.send({ method: 'tagged.photo.info' });        // sends to 1.2.3.4:5678
+apiLogger.send({ method: 'tagged.user.getInfo' }, { calls: 1, process_time_ms: 20 });      // sends to 1.2.3.4:5678
+apiLogger.send({ method: 'tagged.profile.update' }, { calls: 1, process_time_ms: 20 });    // sends to 2.3.4.5:6789
+apiLogger.send({ method: 'tagged.stuff.do' }, { calls: 1, process_time_ms: 20 });          // sends to 3.4.5.6:7890
+apiLogger.send({ method: 'tagged.photo.info' }, { calls: 1, process_time_ms: 20 });        // sends to 1.2.3.4:5678
 ```
 
 ## Files and Directory Structure

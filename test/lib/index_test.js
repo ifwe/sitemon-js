@@ -33,10 +33,10 @@ describe('Sitemon', function() {
             return this.sitemon.send({
                 foo: 'test_foo',
                 bar: 'test_bar'
-            }).then(function() {
+            }, {calls: 1}).then(function() {
                 this.client.send.called.should.be.true;
                 this.client.send.lastCall.args[0].should.be.an.instanceOf(Buffer);
-                this.client.send.lastCall.args[0].toString().should.equal('type=test\nfoo=test_foo\nbar=test_bar');
+                this.client.send.lastCall.args[0].toString().should.equal('table=test\nk.foo=test_foo\nk.bar=test_bar\nv.calls=1');
             }.bind(this));
         });
 
@@ -44,7 +44,7 @@ describe('Sitemon', function() {
             return this.sitemon.send({
                 foo: 'test_foo',
                 bar: 'test_bar'
-            }).then(function() {
+            }, {calls: 1}).then(function() {
                 this.client.send.called.should.be.true;
                 this.client.send.lastCall.args[1].should.equal(0);
             }.bind(this));
@@ -54,9 +54,9 @@ describe('Sitemon', function() {
             return this.sitemon.send({
                 foo: 'test_foo',
                 bar: 'test_bar'
-            }).then(function() {
+            }, {calls: 1}).then(function() {
                 this.client.send.called.should.be.true;
-                this.client.send.lastCall.args[2].should.equal(35); // based on formatted message
+                this.client.send.lastCall.args[2].should.equal(50); // based on formatted message
             }.bind(this));
         });
 
@@ -64,7 +64,7 @@ describe('Sitemon', function() {
             return this.sitemon.send({
                 foo: 'test_foo',
                 bar: 'test_bar'
-            }).then(function() {
+            }, {calls: 1}).then(function() {
                 this.client.send.called.should.be.true;
                 this.client.send.lastCall.args[3].should.equal(5678);
             }.bind(this));
@@ -74,7 +74,7 @@ describe('Sitemon', function() {
             return this.sitemon.send({
                 foo: 'test_foo',
                 bar: 'test_bar'
-            }).then(function() {
+            }, {calls: 1}).then(function() {
                 this.client.send.called.should.be.true;
                 this.client.send.lastCall.args[4].should.equal('1.2.3.4');
             }.bind(this));
@@ -85,7 +85,7 @@ describe('Sitemon', function() {
             return this.sitemon.send({
                 foo: 'test_foo',
                 bar: 'test_bar'
-            }).then(function() {
+            }, {calls: 1}).then(function() {
                 return Promise.reject("Unexpected resolve");
             }).catch(function(error) {
                 error.should.equal('some error');
@@ -103,10 +103,10 @@ describe('Sitemon', function() {
             return this.sitemon.send({
                 foo: 'test_foo',
                 bar: 'test_bar'
-            }).then(function() {
+            }, {calls: 1}).then(function() {
                 this.client.send.called.should.be.true;
                 this.client.send.lastCall.args[0].should.be.an.instanceOf(Buffer);
-                this.client.send.lastCall.args[0].toString().should.equal('type=test\nfoo=test_foo\nbar=test_bar');
+                this.client.send.lastCall.args[0].toString().should.equal('table=test\nk.foo=test_foo\nk.bar=test_bar\nv.calls=1');
             }.bind(this));
         });
 
@@ -114,7 +114,7 @@ describe('Sitemon', function() {
             return this.sitemon.send({
                 foo: 'test_foo',
                 bar: 'test_bar'
-            }).then(function() {
+            }, {calls: 1}).then(function() {
                 this.client.send.called.should.be.true;
                 this.client.send.lastCall.args[1].should.equal(0);
             }.bind(this));
@@ -124,9 +124,9 @@ describe('Sitemon', function() {
             return this.sitemon.send({
                 foo: 'test_foo',
                 bar: 'test_bar'
-            }).then(function() {
+            }, {calls: 1}).then(function() {
                 this.client.send.called.should.be.true;
-                this.client.send.lastCall.args[2].should.equal(35); // based on formatted message
+                this.client.send.lastCall.args[2].should.equal(50); // based on formatted message
             }.bind(this));
         });
 
@@ -134,7 +134,7 @@ describe('Sitemon', function() {
             return this.sitemon.send({
                 foo: 'test_foo',
                 bar: 'test_bar'
-            }).then(function() {
+            }, {calls: 1}).then(function() {
                 this.client.send.called.should.be.true;
                 this.client.send.lastCall.args[3].should.equal(5678);
                 this.client.send.lastCall.args[4].should.equal('1.2.3.4');
@@ -143,11 +143,11 @@ describe('Sitemon', function() {
 
         it('sends each udp packet to a host/port pair in a round-robin fashion', function() {
             return Promise.all([
-                this.sitemon.send({foo: 'test_foo'}),
-                this.sitemon.send({foo: 'test_foo'}),
-                this.sitemon.send({foo: 'test_foo'}),
-                this.sitemon.send({foo: 'test_foo'}),
-                this.sitemon.send({foo: 'test_foo'})
+                this.sitemon.send({foo: 'test_foo'}, {calls: 1}),
+                this.sitemon.send({foo: 'test_foo'}, {calls: 1}),
+                this.sitemon.send({foo: 'test_foo'}, {calls: 1}),
+                this.sitemon.send({foo: 'test_foo'}, {calls: 1}),
+                this.sitemon.send({foo: 'test_foo'}, {calls: 1})
             ]).then(function() {
                 this.client.send.called.should.be.true;
                 this.client.send.getCall(0).args[3].should.equal(5678);
@@ -172,7 +172,7 @@ describe('Sitemon', function() {
             return this.sitemon.send({
                 foo: 'test_foo',
                 bar: 'test_bar'
-            }).then(function() {
+            }, {calls: 1}).then(function() {
                 return Promise.reject("Unexpected resolve");
             }).catch(function(error) {
                 error.should.equal('some error');
